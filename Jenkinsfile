@@ -5,17 +5,24 @@ pipeline {
       parallel {
         stage('Build') {
           steps {
-            sh 'echo "****************Hung: this is build stage"'
+            sh 'mvn clean install'
             sh '''
-                    echo "Multiline shell steps works too"
+                    echo "****************Hung: this is build stage"'''
+            sh '''echo "Multiline shell steps works too"
                     ls -lah
                 '''
           }
         }
 
-        stage('error') {
+        stage('Build Plus') {
           steps {
-            sh 'echo "************Hung: Error path"'
+            sh 'echo "************Hung: Build Plus"'
+          }
+        }
+
+        stage('Build Plus Plus') {
+          steps {
+            echo '******************** Hung: Build Plus Plus'
           }
         }
 
