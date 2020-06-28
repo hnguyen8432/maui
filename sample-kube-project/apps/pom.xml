@@ -13,8 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>sample-app</module>
-        <module>sample-client</module>
+        <module>sample-app</module>        
     </modules>
 
     <dependencies>
