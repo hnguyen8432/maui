@@ -13,9 +13,9 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('error') {
           steps {
-            sh 'Echo "TATATA"'
+            sh 'echo "TATATA"'
           }
         }
 
