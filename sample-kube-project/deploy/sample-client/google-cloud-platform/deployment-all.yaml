@@ -1,0 +1,120 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: sample-client-configmap
+data:
+  # Configuration values can be set as key-value properties
+  spring.profiles.active: prod
+  activemq.host: activemq-svc
+  activemq.port: "61616"
+  activemq.ssl.port: "61617"
+  activemq.ssl.enabled: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: activemq-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - name: broker
+      protocol: TCP
+      port: 61616
+      targetPort: 61616
+    - name: broker-ssl
+      protocol: TCP
+      port: 61617
+      targetPort: 61617
+    - name: admin
+      protocol: TCP
+      port: 8161
+      targetPort: 8161
+  selector:
+    application: activemq-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-client-lb-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    application: client
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: activemq-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        application: activemq-app
+    spec:
+      containers:
+        - name: web
+          image: paradise22/activemq-ssl:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 61616
+              name: broker
+            - containerPort: 61617
+              name: broker-ssl
+            - containerPort: 8161
+              name: admin
+          resources:
+            limits:
+              memory: 512Mi
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sample-client-deployment
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      name: sample-client
+      labels:
+        application: client
+    spec:
+      initContainers:
+        - name: init-mysql
+          image: busybox
+          command: ['sh', '-c', 'until nslookup activemq-svc; do echo waiting for activemq; sleep 2; done;']
+      containers:
+        - image: paradise22/sample-client:1.0
+          name: sample-client
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: sample-client-configmap
+          livenessProbe:
+            initialDelaySeconds: 80
+            timeoutSeconds: 2
+            periodSeconds: 8
+            failureThreshold: 1
+            httpGet:
+              path: /actuator/health
+              port: 8080
+          readinessProbe:
+            periodSeconds: 3
+            initialDelaySeconds: 60
+            failureThreshold: 2
+            timeoutSeconds: 2
+            httpGet:
+              path: /actuator/health
+              port: 8080
+          ports:
+            - containerPort: 8080
+              protocol: TCP

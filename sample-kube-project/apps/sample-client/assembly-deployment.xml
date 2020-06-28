@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    WARNING - This document contains technical data whose export is restricted
+    by the Arms Export Control Act (Title 22, U.S.C., Sec 2751, et seq.) or the
+    Export Administration Act of 1979 (Title 50, U.S.C., App. 2401 et seq), as
+    amended.  Violations of these export laws are subject to severe criminal
+    penalties.  Disseminate in accordance with provisions of DoD Directive
+    5230.25.
+
+    DESTRUCTION NOTICE: Destroy by any method that will prevent disclosure of
+    contents or reconstruction of the document.
+
+-->
+<assembly>
+    <id>deploy</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <baseDirectory>application</baseDirectory>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/src/main/script</directory>
+            <outputDirectory>/bin/</outputDirectory>
+            <fileMode>0774</fileMode>
+            <directoryMode>0774</directoryMode>
+            <filtered>true</filtered>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/main/resources</directory>
+            <outputDirectory>/resources/</outputDirectory>
+            <fileMode>0664</fileMode>
+            <directoryMode>0774</directoryMode>
+            <filtered>true</filtered>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../../config</directory>
+            <outputDirectory>/resources/</outputDirectory>
+            <excludes>
+                <exclude>**/broker*</exclude>
+            </excludes>
+            <fileMode>0664</fileMode>
+            <directoryMode>0774</directoryMode>
+            <!-- binary data - keep intact -->
+            <filtered>false</filtered>
+        </fileSet>
+<!--
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        -->
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+</assembly>

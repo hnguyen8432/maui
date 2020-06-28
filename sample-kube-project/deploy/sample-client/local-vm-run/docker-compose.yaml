@@ -1,0 +1,31 @@
+version: '3'
+services:
+  activemq-ssl:
+    image: paradise22/activemq-ssl:1.0
+    ports:
+      - 8161:8161
+      - 61616:61616
+      - 61617:61617
+      - 61613:61613
+      - 61614:61614
+    environment:
+      ACTIVEMQ_ADMIN_LOGIN: admin
+      ACTIVEMQ_ADMIN_PASSWORD: admin
+
+  sample-client:
+    image: paradise22/sample-client:1.0
+    depends_on:
+      - activemq-ssl
+    environment:
+      spring.profiles.active: prod
+      activemq.host: "activemq-ssl"
+      activemq.port: "61616"
+      activemq.ssl.port: "61617"
+      activemq.ssl.enabled: "true"
+      JAVA_OPTS: >-
+        -XshowSettings:vm
+        -Xmx${MEDIUM_JVM_MEMORY:-2G}
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+    ports:
+    - "9081:8080"
+

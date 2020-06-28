@@ -1,0 +1,6 @@
+
+persistence:
+  enabled: true
+  ##existingClaim: activemq22-datadir
+  size: 100Gi
+  storageClassName: kabant

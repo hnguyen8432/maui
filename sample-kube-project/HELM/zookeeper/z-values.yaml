@@ -1,0 +1,24 @@
+replicaCount: 3
+auth:
+  enabled: false
+
+allowAnonymousLogin: true
+
+service:
+  type: LoadBalancer
+
+metrics:
+  enabled: false
+##image:
+##  registry: harbor.skyfire.internal
+
+persistence:
+  enabled: true
+  # storageClass: "-"
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+  annotations: {}
+
+##image:
+##  registry: harbor.skyfire.internal

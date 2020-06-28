@@ -1,0 +1,60 @@
+2019-12-10 04:16:11,824 [myid:] - INFO  [main:QuorumPeerConfig@124] - Reading configuration from: /conf/zoo.cfg
+2019-12-10 04:16:11,832 [myid:] - INFO  [main:QuorumPeer$QuorumServer@149] - Resolved hostname: zoo1 to address: zoo1/172.19.0.2
+2019-12-10 04:16:11,832 [myid:] - ERROR [main:QuorumPeerConfig@301] - Invalid configuration, only one server specified (ignoring)
+2019-12-10 04:16:11,833 [myid:] - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
+2019-12-10 04:16:11,834 [myid:] - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
+2019-12-10 04:16:11,834 [myid:] - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
+2019-12-10 04:16:11,836 [myid:] - WARN  [main:QuorumPeerMain@113] - Either no config or no quorum defined in config, running  in standalone mode
+2019-12-10 04:16:11,842 [myid:] - INFO  [main:QuorumPeerConfig@124] - Reading configuration from: /conf/zoo.cfg
+2019-12-10 04:16:11,843 [myid:] - INFO  [main:QuorumPeer$QuorumServer@149] - Resolved hostname: zoo1 to address: zoo1/172.19.0.2
+2019-12-10 04:16:11,843 [myid:] - ERROR [main:QuorumPeerConfig@301] - Invalid configuration, only one server specified (ignoring)
+2019-12-10 04:16:11,843 [myid:] - INFO  [main:ZooKeeperServerMain@96] - Starting server
+2019-12-10 04:16:11,846 [myid:] - INFO  [main:Environment@100] - Server environment:zookeeper.version=3.4.9-1757313, built on 08/23/2016 06:50 GMT
+2019-12-10 04:16:11,846 [myid:] - INFO  [main:Environment@100] - Server environment:host.name=zoo1
+2019-12-10 04:16:11,846 [myid:] - INFO  [main:Environment@100] - Server environment:java.version=1.8.0_121
+2019-12-10 04:16:11,846 [myid:] - INFO  [main:Environment@100] - Server environment:java.vendor=Oracle Corporation
+2019-12-10 04:16:11,847 [myid:] - INFO  [main:Environment@100] - Server environment:java.home=/usr/lib/jvm/java-1.8-openjdk/jre
+2019-12-10 04:16:11,847 [myid:] - INFO  [main:Environment@100] - Server environment:java.class.path=/zookeeper-3.4.9/bin/../build/classes:/zookeeper-3.4.9/bin/../build/lib/*.jar:/zookeeper-3.4.9/bin/../lib/slf4j-log4j12-1.6.1.jar:/zookeeper-3.4.9/bin/../lib/slf4j-api-1.6.1.jar:/zookeeper-3.4.9/bin/../lib/netty-3.10.5.Final.jar:/zookeeper-3.4.9/bin/../lib/log4j-1.2.16.jar:/zookeeper-3.4.9/bin/../lib/jline-0.9.94.jar:/zookeeper-3.4.9/bin/../zookeeper-3.4.9.jar:/zookeeper-3.4.9/bin/../src/java/lib/*.jar:/conf:
+2019-12-10 04:16:11,847 [myid:] - INFO  [main:Environment@100] - Server environment:java.library.path=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server:/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64:/usr/lib/jvm/java-1.8-openjdk/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+2019-12-10 04:16:11,847 [myid:] - INFO  [main:Environment@100] - Server environment:java.io.tmpdir=/tmp
+2019-12-10 04:16:11,848 [myid:] - INFO  [main:Environment@100] - Server environment:java.compiler=<NA>
+2019-12-10 04:16:11,848 [myid:] - INFO  [main:Environment@100] - Server environment:os.name=Linux
+2019-12-10 04:16:11,848 [myid:] - INFO  [main:Environment@100] - Server environment:os.arch=amd64
+2019-12-10 04:16:11,848 [myid:] - INFO  [main:Environment@100] - Server environment:os.version=3.10.0-514.26.2.el7.x86_64
+2019-12-10 04:16:11,848 [myid:] - INFO  [main:Environment@100] - Server environment:user.name=zookeeper
+2019-12-10 04:16:11,848 [myid:] - INFO  [main:Environment@100] - Server environment:user.home=/home/zookeeper
+2019-12-10 04:16:11,848 [myid:] - INFO  [main:Environment@100] - Server environment:user.dir=/zookeeper-3.4.9
+2019-12-10 04:16:11,852 [myid:] - INFO  [main:ZooKeeperServer@815] - tickTime set to 2000
+2019-12-10 04:16:11,852 [myid:] - INFO  [main:ZooKeeperServer@824] - minSessionTimeout set to -1
+2019-12-10 04:16:11,853 [myid:] - INFO  [main:ZooKeeperServer@833] - maxSessionTimeout set to -1
+2019-12-10 04:16:11,859 [myid:] - INFO  [main:NIOServerCnxnFactory@89] - binding to port 0.0.0.0/0.0.0.0:2181
+2019-12-10 04:16:12,945 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49831
+2019-12-10 04:16:12,968 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49831 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:12,969 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49831 (no session established for client)
+2019-12-10 04:16:14,359 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49832
+2019-12-10 04:16:14,361 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49832 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:14,362 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49832 (no session established for client)
+2019-12-10 04:16:16,160 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49833
+2019-12-10 04:16:16,162 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49833 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:16,162 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49833 (no session established for client)
+2019-12-10 04:16:17,714 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49835
+2019-12-10 04:16:17,715 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49835 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:17,715 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49835 (no session established for client)
+2019-12-10 04:16:19,227 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49836
+2019-12-10 04:16:19,228 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49836 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:19,228 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49836 (no session established for client)
+2019-12-10 04:16:20,625 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49838
+2019-12-10 04:16:20,626 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49838 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:20,628 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49838 (no session established for client)
+2019-12-10 04:16:22,529 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49839
+2019-12-10 04:16:22,530 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49839 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:22,531 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49839 (no session established for client)
+2019-12-10 04:16:24,564 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49840
+2019-12-10 04:16:24,565 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49840 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:24,566 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49840 (no session established for client)
+2019-12-10 04:16:26,197 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49841
+2019-12-10 04:16:26,198 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49841 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:26,198 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49841 (no session established for client)
+2019-12-10 04:16:27,608 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /10.0.2.2:49842
+2019-12-10 04:16:27,610 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@901] - Refusing session request for client /10.0.2.2:49842 as it has seen zxid 0x1 our last zxid is 0x0 client must try another server
+2019-12-10 04:16:27,610 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1008] - Closed socket connection for client /10.0.2.2:49842 (no session established for client)

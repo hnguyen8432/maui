@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.configMapName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    rsGroup: {{ .Values.resourceGroup }}
+data:
+  ACTIVEMQ_DATA_DIR: {{ .Values.dataDir }}
+  ACTIVEMQ_CONFIG_STOREUSAGE: {{ .Values.storageUsageGb | int | printf "%d gb" | quote }}
+  ACTIVEMQ_LOGGER_LOGLEVEL: {{ .Values.logLevel }}
+  ACTIVEMQ_CONFIG_MAXCONNECTION: {{ .Values.maxConnection | quote }}
+  ACTIVEMQ_ADMIN_LOGIN: {{ .Values.adminLogin }}
+  ACTIVEMQ_ADMIN_PASSWORD: {{ .Values.adminPassword }}

@@ -1,0 +1,10 @@
+kafka:
+  brokerConnect: kk-kafka:9092
+
+jvm:
+  opts: "-Xms32M -Xmx64M"
+
+service:
+  type: LoadBalancer
+  port: 9000
+#  nodePort: 30900

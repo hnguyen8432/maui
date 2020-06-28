@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app-deployment-v1
+  labels:
+    application: sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: greeting
+      team: rainier 
+  template:
+    metadata:
+      labels:
+        application: greeting
+        team: rainier
+    spec:
+      containers:
+      - name: sample-app
+        image: paradise22/sample-app:1.0
+        livenessProbe:
+          initialDelaySeconds: 80
+          timeoutSeconds: 2
+          periodSeconds: 8
+          failureThreshold: 1
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        readinessProbe:
+          periodSeconds: 3
+          initialDelaySeconds: 60
+          failureThreshold: 2
+          timeoutSeconds: 2
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        ports:
+        - containerPort: 8080

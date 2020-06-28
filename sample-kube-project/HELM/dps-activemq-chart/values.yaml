@@ -1,0 +1,23 @@
+## These are the default values
+baseName: activemq
+resourceGroup: activemq
+configMapName: activemq-cm
+applicationName: activemq-application
+volumeName: activemq-data
+namespace: skyfire
+dataDir: /opt/activemq/data
+storageUsageGb: 5
+logLevel: INFO
+maxConnection: 1000
+adminLogin: admin
+adminPassword: admin
+image: XXX/activemq-ssl
+imageTag: 1.0
+deployMemoryLimit: 1Gi
+
+persistence:
+  enabled: true
+  defaultName: activemq-datadir
+  size: 10Gi
+  storageClassName: nfs-client
+

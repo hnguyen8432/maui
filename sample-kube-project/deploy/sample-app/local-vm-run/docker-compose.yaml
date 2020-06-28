@@ -1,0 +1,15 @@
+version: '3'
+services:
+  sample-app:
+    image: paradise22/sample-app:1.0
+    environment:
+      JAVA_OPTS: >-
+        -XshowSettings:vm
+        -Xmx${MEDIUM_JVM_MEMORY:-2G}
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+    ports:
+    - "9080:8080"
+    volumes:
+    - sample_app_volume:/share/
+volumes:
+  sample_app_volume: {}

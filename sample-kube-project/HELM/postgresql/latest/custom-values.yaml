@@ -1,0 +1,46 @@
+#image:
+#  registry: harbor.skyfire.internal
+#  repository: bitnami/postgresql
+#  tag: 12.2.0-debian-10-r55
+
+#global:
+#  postgresql:
+#    postgresqlUsername: postgres
+#    postgresqlPassword: 123Postgres
+
+postgresqlUsername: postgres
+postgresqlPassword: 123Postgres
+
+persistence:
+  enabled: true
+  size: 8Gi
+#  storageClass: nfs-client
+
+## Dictionaries of value
+postgresqlConfiguration:
+  max_connections: "100"                ## (change requires restart)
+  shared_buffers: "1GB"                 ## min 128kB
+  work_mem: "8MB"                       ##  min 64kB
+  dynamic_shared_memory_type: "posix"   ## the default is the first option
+    ## supported by the operating system:
+    ##   posix
+    ##   sysv
+    ##   windows
+    ##   mmap
+    ## use none to disable dynamic shared memory
+  ## (change requires restart)
+  effective_cache_size: "2GB"
+  datestyle: "'iso, mdy'"
+  timezone: "'UTC'"
+  ## These settings are initialized by initdb, but they can be changed.
+  lc_messages: "'en_US.UTF-8'"          ## locale for system error message
+  ## strings
+  lc_monetary: "'en_US.UTF-8'"          ## locale for monetary formatting
+  lc_numeric: "'en_US.UTF-8'"           ## locale for number formatting
+  lc_time: "'en_US.UTF-8'"              ## locale for time formatting
+  ## Add settings for extensions here
+  listen_addresses: "'*'"
+
+## PostgreSQL service configuration
+service:
+  type: LoadBalancer

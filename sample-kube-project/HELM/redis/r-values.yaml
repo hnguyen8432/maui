@@ -1,0 +1,8 @@
+master:
+  service:
+    ##  Redis Master Service type
+    type: LoadBalancer
+##port: 6379
+
+usePassword: true
+password: "123Hung"

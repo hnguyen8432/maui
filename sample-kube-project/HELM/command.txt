@@ -1,0 +1,139 @@
+https://www.ibm.com/support/knowledgecenter/en/SS8TQM_1.1.0/app_center/add_package.html
+https://medium.com/containerum/how-to-make-and-share-your-own-helm-package-50ae40f6c221
+https://dev.to/dariusx/recommend-a-simple-kafka-ui-tool-5gob
+https://www.digitalocean.com/community/tutorials/how-to-inspect-kubernetes-networking
+
+https://guide.opencord.org/cord-6.1/charts/kafka.html
+ helm repo add cord https://charts.opencord.org
+ helm fetch cord/kafkacat
+
+ kubectl exec -it kafkacat-866dd676b4-bg6ph bash -n aurora
+
+kafkacat -L -b kk-kafka  #Metadatqa
+
+kafkacat -b cord-kafka -C -t <kafka-topic>
+ kafkacat -b cord-kafka -C -t xos.log.core
+ kafkacat -b cord-kafka -C -t xos.gui_events
+ kafkacat -b cord-kafka -C -t voltha.events
+ kafkacat -b cord-kafka -C -t onu.events
+ kafkacat -b cord-kafka -C -t authentication.events
+ kafkacat -b cord-kafka -C -t dhcp.events
+-------------------------------------------------------------------------------------
+docker container run --detach --name kafkacat edenhill/kafkacat:1.5.0
+ docker pull obsidiandynamics/kafdrop
+
+ssh -i id_rsa nguyenhu@dis-hn-01.skyfire.internal -L 9092:kafka-01.hn:9092
+sudo lsof -i -n | egrep '\<ssh\>' |grep -v sshd
+
+kubectl get events -n aurora --sort-by=.metadata.creationTimestamp
+
+
+export POD_NAME=$(kubectl get pods --namespace skyfire -l "app.kubernetes.io/name=kafka,app.kubernetes.io/instance=kb,app.kubernetes.io/component=kafka" -o jsonpath="{.items[0].metadata.name}")
+Create topic
+ kubectl --namespace aurora exec -it $POD_NAME -- kafka-topics.sh --create --zookeeper zoko1-zookeeper:2181 --replication-factor 1 --partitions 1 --topic test
+List topic
+ kubectl --namespace aurora exec -it $POD_NAME -- kafka-topics.sh --list --zookeeper zoko1-zookeeper:2181
+
+Kafka producer
+ kubectl --namespace aurora exec -it $POD_NAME -- kafka-console-producer.sh --broker-list localhost:9092 --topic hung
+Kafka consumer
+ kubectl --namespace aurora exec -it $POD_NAME -- kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic hung --from-beginning
+
+helm install -f z-values.yaml -name zoko1  /zookeeper-5.4.2.tgz -n aurora
+helm install  -f k-values.yaml --set persistence.existingClaim=data-kb-kafka-0 -name kb kafka-7.2.3.tgz -n aurora
+helm install -f r-values.yaml -name rafa redis-10.5.1.tgz -n aurora
+
+
+export SERVICE_IP=$(kubectl get svc --namespace aurora rafa-redis-master --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
+
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+zoko1-zookeeper.aurora.svc.cluster.local
+
+helm create dps-activemq-chart
+
+helm install full-coral ./dps-activemq-chart -n aurora
+helm get manifest full-coral -n aurora
+
+helm lint --debug ./mychart
+helm template --debug  ./mychart
+helm template --set persistence.existingClaim=yoyoma --debug  ./dps-activemq-chart
+helm template -f testValues.yaml --debug  ./dps-activemq-chart
+helm lint --strict dps-activemq-chart
+helm package dps-activemq-chart
+helm install local/tomcat --version 0.1.0
+
+
+
+helm install --debug --dry-run goodly-guppy ./mychart -n aurora
+
+---------------------------------------------------------
+https://helm.sh/docs/intro/using_helm/
+
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo update
+helm search repo stable
+helm search repo  bitnami
+helm install stable/mysql --generate-name -n skyfire
+helm ls -n skyfire
+helm uninstall <install name>  --keep-history
+helm get -h
+helm fetch stable/mysql
+
+
+helm search hub
+helm search repo
+helm search hub wordpress
+
+helm repo add brigade https://brigadecore.github.io/charts
+helm search repo brigade
+
+helm status happy-panda
+
+
+Customizing the Chart Before Installing
+
+helm show values stable/mariadb
+echo '{mariadbUser: user0, mariadbDatabase: user0db}' > config.yaml
+ helm install -f config.yaml stable/mariadb --generate-name
+
+Specifying value by
+Use --values (or -f)
+or --set
+
+
+Other chart installation method
+helm install foo foo-0.1.1.tgz
+helm install foo path/to/foo
+helm install foo https://example.com/charts/foo-1.2.3.tgz
+
+Upgrade to new version
+helm upgrade -f panda.yaml happy-panda stable/mariadb
+helm get values happy-panda
+helm rollback happy-panda 1
+
+
+helm uninstall happy-panda
+ helm repo list
+helm repo add dev https://example.com/dev-charts
+
+Create a chart
+helm create deis-workflow
+
+Validate a chart
+helm lint.
+
+Packaging
+helm package deis-workflow
+
+Install a chart
+helm install deis-workflow ./deis-workflow-0.1.0.tgz
+
+Or upload to a repository
+--------------
+
+
+
+
+
+

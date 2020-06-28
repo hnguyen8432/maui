@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.baseName }}-deploy
+  namespace: {{ .Release.Namespace }}
+  labels:
+    rsGroup: {{ .Values.resourceGroup }}
+    app: {{ .Values.baseName }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        application: {{ .Values.applicationName }}
+        rsGroup: {{ .Values.resourceGroup }}
+    spec:
+      containers:
+        - name: activemq-app
+          image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configMapName }}
+          volumeMounts:
+            - name: activemq-data
+              mountPath: {{ .Values.dataDir }}
+              readOnly: false
+          ports:
+            - containerPort: 61616
+              name: broker
+            - containerPort: 61617
+              name: broker-ssl
+            - containerPort: 8161
+              name: admin
+          resources:
+            limits:
+              memory: {{ .Values.deployMemoryLimit | quote }}
+      volumes:
+        - name: activemq-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default .Values.persistence.defaultName }}

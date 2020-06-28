@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WARNING - This document contains technical data whose export is restricted
+    by the Arms Export Control Act (Title 22, U.S.C., Sec 2751, et seq.) or the
+    Export Administration Act of 1979 (Title 50, U.S.C., App. 2401 et seq), as
+    amended. Violations of these export laws are subject to severe criminal penalties.
+    Disseminate in accordance with provisions of DoD Directive 5230.25. DESTRUCTION
+    NOTICE: Destroy by any method that will prevent disclosure of contents or
+    reconstruction of the document. -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.solers.skyfire.common.spring.SpringPropertiesLogger" />
+
+    <bean id="cryptTool" class="com.solers.skyfire.common.utilities.crypto.CryptToolWrapper">
+        <property name="keyFilename" value="${key.filename}"/>
+    </bean>
+
+    <!-- ActiveMQ JMS connection pool -->
+    <!-- Support non-SSL and SSL pooled connection factory through sslEnabled switch -->
+    <bean id="pooledConnectionFactory" class="com.solers.skyfire.common.messaging.activemq.PooledConnectionFactoryCreator"
+          init-method="start" destroy-method="stop">
+        <constructor-arg name="sslEnabled"         value="${activemq.ssl.enabled}" />
+        <constructor-arg name="brokerURL"          value="${activemq.url}" />
+        <constructor-arg name="brokerSslURL"       value="${activemq.ssl.url}" />
+        <constructor-arg name="trustStore"         value="${activemq.ssl.trustStore}"/>
+        <constructor-arg name="trustStorePassword" value="password"/>
+        <!-- <constructor-arg name="trustStorePassword" value="#{ cryptTool.decryptString('${activemq.ssl.trustStorePassword}') }"/> -->
+        <constructor-arg name="keyStore"           value="${activemq.ssl.keyStore}"/>
+        <constructor-arg name="keyStorePassword"   value="password"/>
+        <!-- <constructor-arg name="keyStorePassword"   value="#{ cryptTool.decryptString('${activemq.ssl.keyStorePassword}') }"/> -->
+    </bean>
+
+    <bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+        <property name="connectionFactory" value="#{pooledConnectionFactory.getFactory()}"/>
+    </bean>
+
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="configuration" ref="jmsConfig"/>
+    </bean>
+</beans>

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.baseName }}-svc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    rsGroup: {{ .Values.resourceGroup }}
+    app: {{ .Values.baseName }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+spec:
+  type: LoadBalancer
+  ports:
+    - name: broker
+      protocol: TCP
+      port: 61616
+      targetPort: 61616
+    - name: broker-ssl
+      protocol: TCP
+      port: 61617
+      targetPort: 61617
+    - name: admin
+      protocol: TCP
+      port: 8161
+      targetPort: 8161
+  selector:
+    application: {{ .Values.applicationName }}

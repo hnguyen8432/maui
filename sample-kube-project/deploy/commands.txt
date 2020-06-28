@@ -1,0 +1,151 @@
+https://cloud.google.com/kubernetes-engine/docs/quickstart
+
+Use google account, Enable billing free 12 months, create a project in the GCP, enable kubernetes engine API
+Install Google SDK
+
+gcloud container clusters create mycluster --num-nodes 3 --machine-type fl-micro
+docker pull webcenter/activemq:5.14.3
+
+volume is found at /var/lib/docker/volumes/...
+-----------------------------------------------------------
+pod, node, deployment, cm, service, ns
+k get po <name> -o yaml
+k logs <pod-name> -c <container-name>
+k port-forward <pod-name> 8888:8080   #8080 is pod port
+k get po --show-labels
+k get po -L ___ ___
+Can add/update/remove label from kubectl command
+k logs <pod--> previous
+Organize label
+apps:___
+rel:___
+
+Create namespace by yaml page 78
+can set name space context
+
+DNS name of service
+<name>.default.svc.cluster.local
+Firewal rule  p 137 bottom
+minikube add ons list p 143
+tutum/dsutils p155
+
+d build  -/-
+d push   -/-
+
+-----------------------------------------------------------
+logging
+https://www.baeldung.com/slf4j-with-log4j2-logback
+yaml
+https://camel.readthedocs.io/en/latest/yamlref.html
+
+Kubernetes
+https://www.alibabacloud.com/blog/kubernetes-demystified-solving-service-dependencies_594110
+
+https://caylent.com/kubectl-commands-cheat-sheet
+https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html
+https://akomljen.com/kubernetes-api-resources-which-group-and-version-to-use/
+https://kubernetes.io/docs/reference/using-api/#api-versioning
+https://github.com/garethr/kubernetes-json-schema/tree/master/v1.14.0-standalone
+https://v1-12.docs.kubernetes.io/docs/reference/federation/extensions/v1beta1/definitions/
+
+https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d
+
+Spring clund config
+https://www.baeldung.com/spring-cloud-kubernetes
+
+https://www.morethanseven.net/2017/06/26/schemas-for-kubernetes-types/
+
+#List available apiVersion
+kubectl api-resources -o wide
+# List of supported
+kubectl api-versions
+#check if a particular group/version is available for some resource.
+# kubectl get <API_RESOURCE_NAME>.<API_VERSION>.<API_GROUP>
+kubectl get deployments.v1.apps -n kube-system
+
+
+
+Only Job, Deployment, Replica Set, and Daemon Set support matchLabels.
+NodeSelector applies if you add labels to nodes which are vms
+kubectl get pods -l 'environment in (production, qa)'
+kubectl get pods --field-selector status.phase=Running
+
+Main benefir of vagrant is 
+instead of bother yourself with installing tools on windows or reinstall them..
+developer just do "vagrant up"
+It is optional 
+Port mapping, snapshot
+consistency with othe projects
+
+
+selector:
+  matchLabels:
+    component: redis
+  matchExpressions:
+    - {key: tier, operator: In, values: [cache]}
+    - {key: environment, operator: NotIn, values: [dev]}
+
+
+docker container exec -it a5eb93fbcc4f /bin/sh
+                                       sh
+
+docker volume create myvolume    # created /var/lib/docker/volumes
+dockr volume ls
+docker volume inspect <id>
+# USe -v or -mount to mount the volumee
+docker container run -d --name devecontainer --mount source=myvolume,target=/app nginx   #Service supports ony --mountcon
+docker container run -d --name devecontainer -v myvolume:/app nginx
+docker container run -d --name devecontainer -v myvolume:/app,readonly nginx
+docker container inspect
+
+Dockerfile
+VOLUME  /var/lib/spring-boot  /tmp                      Create volume mapping host /var/lib/docker/volumes/<generate id>/_data  mount to /var/lib/spring-boot
+                                                        Create volume mapping host /var/lib/docker/volumes/<generate id 2>/_data  mount to /tmp
+
+-----------------------------
+Build image from Dockerfile
+docker build -t hnginx .
+Run it
+docker run -d -p 1080:80 hnginx
+
+docker rm -v container_id  # Remove container with -v remove volume if no other container use it
+Volumes mapped to a chosen host directory (using -v host_dir:container_dir) are never deleted.
+docker rm -f -v 9f113c2c2c07   # stop, remove container as well as volume
+
+--------------- One command to stop and remove container
+docker rm -f CONTAINER_ID  # Will stop and remove
+Or use --rm option. The container wll be removed when stopped
+
+---------------test compose
+docker-compose up -d
+
+docker compose ps  #Must do it in the same folder which compose file exists OR
+docker-compose -f <path to compose file> ps
+docker-compose stop
+docker-compose start
+docker-compose restart
+docker-compose downn
+
+# Can change yml file and then run docker-compose will replace existing apps
+docker-compose build
+
+
+#don't forget login the gcloud
+k create -f same-file.yaml
+k exec -it <pod name> sh
+gcloud compute firewall-rules create sample-app-svc-rule --allow=tcp:31247
+kubectl get nodes -o json > node.json   # find externalIP of nodes
+
+# Lookup node external Ip
+kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'
+k logs <pod-id> --previous   # previous log
+
+k create -f pod-deployment.yaml --record
+k rollout status deployment  sample-app-deployment
+k get replicasets
+k set image deployment sampl-app-deployment sample-app=paradise22/sample-app:2.0
+k rollout history deployment sample-app-deployment   # get revision
+k rollout undo deployment sample-app-deployment --to-revision=1
+
+kubectl scale deployments/sample-app-deployment --replicas=4
+kubectl scale deployments/sample-app-deployment --current-replicas=2 --replicas=3 #conditional replicas

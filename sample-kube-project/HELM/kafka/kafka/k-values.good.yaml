@@ -1,0 +1,39 @@
+
+service:
+  type: LoadBalancer
+  port: 9092
+
+externalAccess:
+  enabled: false
+##  service:
+##    port: 19092
+##    type: LoadBalancer
+##    loadBalancerIP: [172.28.7.23]
+
+
+#image:
+#  registry: harbor.skyfire.internal
+#  tag: 2.4.0-debian-10-r15
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: "3Gi"
+  ##size: "10Gi"
+  ##storageClass: nfs-client
+
+## Timeout in ms for connecting to zookeeper.
+zookeeperConnectionTimeoutMs: "1000000"
+deleteTopicEnable: true
+
+replicaCount: 1
+##
+## Zookeeper chart configuration
+##
+## https://github.com/bitnami/charts/blob/master/bitnami/zookeeper/values.yaml
+##
+zookeeper:
+  enabled: false
+
+## This value is only used when zookeeper.enabled is set to false
+externalZookeeper:
+  servers: zoko1-zookeeper

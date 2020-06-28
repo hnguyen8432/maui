@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    WARNING - This document contains technical data whose export is restricted
+    by the Arms Export Control Act (Title 22, U.S.C., Sec 2751, et seq.) or the
+    Export Administration Act of 1979 (Title 50, U.S.C., App. 2401 et seq), as
+    amended.  Violations of these export laws are subject to severe criminal
+    penalties.  Disseminate in accordance with provisions of DoD Directive
+    5230.25.
+
+    DESTRUCTION NOTICE: Destroy by any method that will prevent disclosure of
+    contents or reconstruction of the document.
+
+-->
+<assembly>
+    <id>deploy</id>
+    <formats>
+        <format>dir</format>
+    </formats>
+    <baseDirectory>activemq-ssl</baseDirectory>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/config/</directory>
+            <outputDirectory>/opt/activemq/conf</outputDirectory>
+            <fileMode>0664</fileMode>
+            <directoryMode>0774</directoryMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../../config/keys</directory>
+            <outputDirectory>/opt/activemq/conf</outputDirectory>
+            <includes>
+                <include>**/broker*</include>
+            </includes>
+            <fileMode>0664</fileMode>
+            <directoryMode>0774</directoryMode>
+            <!-- binary data - keep intact -->
+            <filtered>false</filtered>
+        </fileSet>
+    </fileSets>
+</assembly>

@@ -1,0 +1,27 @@
+
+replicas: 1
+#imageTag: "5.0.1"  # Confluent image for Kafka 2.0.0
+
+external:
+  enabled: true
+  # type can be either NodePort or LoadBalancer
+  type: NodePort
+  dns:
+    useInternal: false
+    useExternal: true
+  # If using external service type LoadBalancer and external dns, set distinct to true below.
+  # This creates an A record for each statefulset pod/broker. You should then map the
+  # A record of the broker to the EXTERNAL IP given by the LoadBalancer in your DNS server.
+  distinct: false
+  servicePort: 19092
+  firstListenerPort: 31090
+  domain: cluster.local
+  loadBalancerIP: []
+  loadBalancerSourceRanges: []
+#  init:
+#    image: "utils/kubectl_deployer"
+#    imageTag: "0.4"
+
+#persistence:
+#  size: "4Gi"
+#  storageClass: nfs-client
