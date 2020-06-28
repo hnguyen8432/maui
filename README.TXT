@@ -63,3 +63,5 @@ On virtualBox UI right click Minikube >> settings >> Network >> Adapter 2 >> Adv
    kubectl scale deployments/sample-app-deployment-v1 --replicas=3
    
 
+Do some change
+
