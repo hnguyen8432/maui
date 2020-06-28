@@ -22,9 +22,9 @@ pipeline {
       }
     }
 
-    stage('error') {
+    stage('Ending') {
       steps {
-        echo 'Hello 2 '
+        echo 'This is "The End"'
       }
     }
 
